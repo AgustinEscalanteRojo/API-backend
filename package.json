@@ -2,10 +2,21 @@
   "name": "API-backend",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "repository": "https://github.com/AgustinEscalanteRojo/API-backend.git",
   "author": "Agustin <agustinescalanterojo@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
-    "express": "^4.18.2"
+    "bcrypt": "^5.1.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.3.1",
+    "nodemon": "^2.0.22",
+    "prettierrc": "^0.0.0-5"
   }
 }

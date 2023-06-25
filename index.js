@@ -1,42 +1,34 @@
-import express from "express";
-import bodyParser from "body-parser";
+import express from 'express'
+import bodyParser from 'body-parser'
+import taskRouter from './src/router/tasks.js'
+import connectToDB from './src/services/db'
 
-const app = express();
-const port = 8080;
+const startApp = async () => {
+  const app = express()
+  const port = 8080
 
-app.use(bodyParser.json());
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
+  app.use(bodyParser.json())
+  app.use(
+    bodyParser.urlencoded({
+      extended: true,
+    })
+  )
+
+  app.get('/', (request, response) => {
+    response.json({ info: 'hola mundo' })
   })
-);
 
-app.get('/', (request, response) => {
-    response.json({info: 'hola mundo'})
-})
+  app.use('/tasks', taskRouter)
 
-app.get('/tasks', (request, response) => {
-    // FLUJO DE LOGICA
+  try {
+    await connectToDB()
+    app.listen(port, () => {
+      console.log(`Server start in ${port} port`)
+    })
+  } catch (e) {
+    console.log(e)
+    procces.exit(1)
+  }
+}
 
-    const tasks = [
-       {name: 'TV'}, 
-       {name: 'SALON'}, 
-       {name: 'CAR'},
-    ]
-    
-    response.json({tasks})
-})
-
-app.get('/tasks/:id', (request, response) => {
-    response.json(ID: request.params.id)
-})
-
-app.post('/tasks', (request, response) => {
-    response.json(...request.body, from: 'server')
-})
-
-
-
-app.listen(port, () => {
-    console.log(`Server start in ${port} port`) 
-})
+startApp()

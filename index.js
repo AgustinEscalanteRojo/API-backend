@@ -1,7 +1,7 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import taskRouter from './src/router/tasks.js'
-import connectToDB from './src/services/db'
+import connectToDb from './src/services/db.js'
 
 const startApp = async () => {
   const app = express()
@@ -21,7 +21,7 @@ const startApp = async () => {
   app.use('/tasks', taskRouter)
 
   try {
-    await connectToDB()
+    await connectToDb()
     app.listen(port, () => {
       console.log(`Server start in ${port} port`)
     })

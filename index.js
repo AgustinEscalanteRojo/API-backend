@@ -26,7 +26,7 @@ const startApp = async () => {
   })
 
   app.use('/tasks', taskRouter)
-  app.use('/tasks', authRouter)
+  app.use('/auth', authRouter)
 
   try {
     await connectToDb()

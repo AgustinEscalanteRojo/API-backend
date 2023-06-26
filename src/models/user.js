@@ -1,14 +1,15 @@
 import mongoose from 'mongoose'
 
-const TaskSchema = new mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
-    name: {
+    email: {
       type: String,
       require: true,
       unique: true,
       trim: true,
       lowerCase: true,
     },
+    
     password: {
       type: String,
       require: true,
@@ -17,6 +18,6 @@ const TaskSchema = new mongoose.Schema(
   { collection: 'users' }
 )
 
-const User = mongoose.model('User', UserSchema)
+const User = mongoose.model('User', userSchema)
 
 export default User

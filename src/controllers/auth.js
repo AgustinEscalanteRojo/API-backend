@@ -8,11 +8,12 @@ import jwt from 'jsonwebtoken'
  * @return {Promise<string>}
  */
 
-export const login = async ({ email: string, password: string }) => {
+export const login = async ({ email, password }) => {
   if (!email || !password)  {
     throw new Error('Miss some fields')
   }
-  const hasUser = await User.findeOne({ email })
+  const hasUser = await User.findOne({ email })
+  const user = await User.findOne({ email })
 
   if (!user) {
     throw new Error('User not found')
@@ -32,16 +33,19 @@ export const login = async ({ email: string, password: string }) => {
  * @return {Promise<string>}
  */
 
+const saltRounds = 10
+
 export const signup = async ({ email, password }) => {
   if (!email || !password)  {
     throw new Error('Miss some fields')
   }
 
-  const hasUser = await User.findeOne({ email })
+  const hasUser = await User.findOne({ email })
   if (hasUser) {
     throw new Error('Email is used')
   }
-  const hashedPassword = await bcrypt.hash(password, 'sha256')  // sha256 hash of password  hash for   password hashing algorithm and password hashing algorithm
+  const salt = await bcrypt.genSalt(saltRounds)
+  const hashedPassword = await bcrypt.hash(password, salt)  // salt
   const user = new User({ email, password: hashedPassword })
   await user.save()
   return jwt.sign({ email, id: user._id }, process.env.TOKEN_SECRET)

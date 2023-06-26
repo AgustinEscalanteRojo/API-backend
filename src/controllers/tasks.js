@@ -1,19 +1,18 @@
-import Task from '../models/task.js'
+import Task from '../../src/models/tasks.js'
 
 /**
- * @param {string} id 
+ * @param {string} id
  * @returns {{name: string, id: string},}
  */
 
 export const getTasksById = async () => {
-  const task = await Task.findOne({_id: id})
+  const task = await Task.findOne({ _id: id })
 
   if (!task) {
     throw new Error('Task not found')
   }
 
-  return task 
-
+  return task
 }
 
 /**
@@ -25,35 +24,35 @@ export const getTasks = async () => {
 }
 
 /**
- * @param {object} data 
- * @param {string} data.name 
+ * @param {object} data
+ * @param {string} data.name
  * @returns {*}
  */
 
-export const createTasks = async ({ name }) => {
-    const task = new Task( name )
-  
-    return task.save()
-  }
+export const createTask = async ({ name }) => {
+  const task = new Task(name)
+
+  return task.save()
+}
 
 /**
- * @param {string} id 
+ * @param {string} id
  * @param {object} data
  * @returns {*&{id}}
  */
 
-export const updateTasks = async (id, data) => {
-    await Task.findOneAndUpadte({_id, id}, data)
+export const updateTask = async (id, data) => {
+  await Task.findOneAndUpadte({ _id, id }, data)
 
-    return getTasksById(id)
-  }
+  return getTasksById(id)
+}
 
 /**
- * @param {string} id 
+ * @param {string} id
  * @returns {boolean}
  */
 
 export const removeTasksById = async (id) => {
-    await Task.deleteOne({_id, id},)
-    return true
-  }
+  await Task.deleteOne({ _id, id })
+  return true
+}

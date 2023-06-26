@@ -5,7 +5,7 @@ import {
   getTasksById,
   removeTasksById,
   updateTask,
-} from '../controllers/tasks.js'
+} from '../../src/controllers/tasks.js'
 
 const router = express.Router()
 
@@ -29,8 +29,8 @@ router.get('/:id', async (request, response) => {
 })
 
 router.post('/', async (request, response) => {
-  const createdTask = await createTask(request.body)
-  response.json({ task: createdTask })
+  const createTask = await createTask(request.body)
+  response.json({ task: createTask })
 })
 
 router.put('/:id', async (request, response) => {

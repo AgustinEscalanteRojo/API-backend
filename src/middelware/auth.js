@@ -2,8 +2,13 @@ import jwt from 'jsonwebtoken'
 import User from '../models/user.js'
 
 export const ensureAuthenticated = async (request, response, next) => {
+
+  if (request.path.includes('/auth')) {
+    return next()
+  }
+
   if (!request.headers.authorization) {
-    return response.status(403).send({ message: 'You are not authenticated' })
+    return response.status(403).send({ message: 'You are not authenticated 1' })
   }
 
   const token = request.headers.authorization.split(' ')[1]

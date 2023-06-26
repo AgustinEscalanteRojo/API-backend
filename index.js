@@ -3,6 +3,9 @@ import bodyParser from 'body-parser'
 import taskRouter from './src/router/tasks.js'
 import authRouter from './src/router/auth.js'
 import connectToDb from './src/services/db.js'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const startApp = async () => {
   const app = express()

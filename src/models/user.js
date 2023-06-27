@@ -9,10 +9,13 @@ const userSchema = new mongoose.Schema(
       trim: true,
       lowerCase: true,
     },
-    
     password: {
       type: String,
       require: true,
+    },
+    salt: {
+      type: String,
+      required: true,
     },
   },
   { collection: 'users' }

@@ -46,7 +46,7 @@ export const signup = async ({ email, password }) => {
   }
   const salt = await bcrypt.genSalt(saltRounds)
   const hashedPassword = await bcrypt.hash(password, salt)  // salt
-  const user = new User({ email, password: hashedPassword })
+  const user = new User({ email, password: hashedPassword, salt })
   await user.save()
   return jwt.sign({ email, id: user._id }, process.env.TOKEN_SECRET)
 }

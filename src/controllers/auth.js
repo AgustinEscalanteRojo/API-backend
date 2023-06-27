@@ -26,8 +26,6 @@ export const signup = async ({ email, password }) => {
   return jwt.sign({ email: user.email }, process.env.TOKEN_SECRET)
 }
 
-// id: user._id
-
 /**
  * @param {string} email
  * @param {string} password

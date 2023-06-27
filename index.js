@@ -21,12 +21,9 @@ const startApp = async () => {
 
   app.use(ensureAuthenticated)
 
-  // app.get('/', (request, response) => {
-  //   response.json({ info: 'hola mundo' })
-  // })
-
   app.use('/tasks', taskRouter)
   app.use('/auth', authRouter)
+  app.use('/syncApiNasa', syncApiRouter)
 
   try {
     await connectToDb()

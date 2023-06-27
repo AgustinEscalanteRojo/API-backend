@@ -42,7 +42,7 @@ export const createTask = async ({ name }) => {
  */
 
 export const updateTask = async (id, data) => {
-  await Task.findOneAndUpadte({ _id, id }, data)
+  await Task.findOneAndUpdate({ _id, id }, data)
 
   return getTasksById(id)
 }

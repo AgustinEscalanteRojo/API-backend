@@ -1,12 +1,22 @@
-// import mongoose from 'mongoose'
+import mongoose from 'mongoose'
 
-// const NasaSchema = new mongoose.Schema({
-//   name: {
-//     type: String,
-//     required: true,
-//   },
-// }, {collection: 'nasas'})
+const dataSchema = new mongoose.Schema({
 
-// const Nasa = mongoose.model('Nasa', NasaSchema)
+  idNasa: {
+    type: Number,
+    required: true,
+  },
+  camera: {
+    name: String,
+  },
+  img_src: {
+    type: String,
+  },
+  earth_date: {
+    type: String,
+  },
+})
 
-// export default Nasa 
+const Data = mongoose.model('Data', dataSchema)
+
+export default Data

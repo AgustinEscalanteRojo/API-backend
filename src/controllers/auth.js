@@ -8,8 +8,34 @@ import jwt from 'jsonwebtoken'
  * @return {Promise<string>}
  */
 
+const saltRounds = 10
+
+export const signup = async ({ email, password }) => {
+  if (!email || !password) {
+    throw new Error('Miss some fields')
+  }
+
+  const hasUser = await User.findOne({ email })
+  if (hasUser) {
+    throw new Error('Email is used')
+  }
+  const salt = await bcrypt.genSalt(saltRounds)
+  const hashedPassword = await bcrypt.hash(password, salt) // salt
+  const user = new User({ email, password: hashedPassword, salt })
+  await user.save()
+  return jwt.sign({ email: user.email }, process.env.TOKEN_SECRET)
+}
+
+// id: user._id
+
+/**
+ * @param {string} email
+ * @param {string} password
+ * @return {Promise<string>}
+ */
+
 export const login = async ({ email, password }) => {
-  if (!email || !password)  {
+  if (!email || !password) {
     throw new Error('Miss some fields')
   }
   const hasUser = await User.findOne({ email })
@@ -24,29 +50,5 @@ export const login = async ({ email, password }) => {
   if (!matchedPassword) {
     throw new Error('invalid password')
   }
-  return jwt.sign({ email, id: user._id }, process.env.TOKEN_SECRET)
-}
-
-/**
- * @param {string} email
- * @param {string} password
- * @return {Promise<string>}
- */
-
-const saltRounds = 10
-
-export const signup = async ({ email, password }) => {
-  if (!email || !password)  {
-    throw new Error('Miss some fields')
-  }
-
-  const hasUser = await User.findOne({ email })
-  if (hasUser) {
-    throw new Error('Email is used')
-  }
-  const salt = await bcrypt.genSalt(saltRounds)
-  const hashedPassword = await bcrypt.hash(password, salt)  // salt
-  const user = new User({ email, password: hashedPassword, salt })
-  await user.save()
   return jwt.sign({ email, id: user._id }, process.env.TOKEN_SECRET)
 }

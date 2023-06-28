@@ -1,18 +1,17 @@
 import express from 'express'
+import getApiNasa from '../services/apiNasa.js'
 import {
   createNasa,
   getNasaById,
-  getNasaRovers,
   updateNasa,
   deleteNasaById,
 } from '../../src/controllers/controllerNasa.js'
+
 const routerNasa = express.Router()
-//TODO: falta importar el servicio de API Nasa
-//TODO: falta importar los controladores de la NASA
 
 routerNasa.get('/', async (request, response) => {
   try {
-    const result = await getNasaRovers()
+    const result = await getApiNasa()
 
     response.json({ result })
   } catch (e) {

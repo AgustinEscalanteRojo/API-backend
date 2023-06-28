@@ -1,7 +1,6 @@
 import mongoose from 'mongoose'
 
 const dataSchema = new mongoose.Schema({
-
   idNasa: {
     type: Number,
     required: true,

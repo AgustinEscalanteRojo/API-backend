@@ -20,9 +20,9 @@ export const createNasa = async ({ idNasa, camera, img_src, earth_date }) => {
 }
 
 export const updateNasa = async (id, data) => {
-  const result = await Data.findOneAndUpdate(id, data, {new: true})
+  const result = await Data.findOneAndUpdate(id, data, { new: true })
 
-  return result 
+  return result
 }
 
 export const deleteNasaById = async (id) => {

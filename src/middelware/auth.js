@@ -2,7 +2,6 @@ import jwt from 'jsonwebtoken'
 import User from '../models/user.js'
 
 export const ensureAuthenticated = async (request, response, next) => {
-
   if (request.path.includes('/auth')) {
     return next()
   }

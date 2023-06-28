@@ -12,23 +12,23 @@ RUN apt-get update && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
-RUN groupadd -g 1000 tasks && \
-	useradd -ms /bin/bash -u 1000 -g 1000 tasks && \
+RUN groupadd -g 1000 nasa && \
+	useradd -ms /bin/bash -u 1000 -g 1000 nasa && \
 	mkdir -p /app && \
-	chown tasks:tasks /app
+	chown nasa:nasa /app
 
 COPY --from=node_binaries /usr/local/bin/node /usr/local/bin/node
 COPY --from=node_binaries /opt/yarn-v1.22.5 /opt/yarn-v1.22.5
 RUN ln -s /opt/yarn-v1.22.5/bin/yarn /usr/local/bin/yarn
 
-USER tasks
+USER nasa
 WORKDIR /app
 
-COPY --chown=tasks:tasks package.json .
-COPY --chown=tasks:tasks yarn.lock .
+COPY --chown=nasa:nasa package.json .
+COPY --chown=nasa:nasa yarn.lock .
 
 RUN yarn install --frozen-lockfile && yarn cache clean
 
-COPY --chown=tasks:tasks src src/
+COPY --chown=nasa:nasa src src/
 
 CMD ["yarn", "start"]

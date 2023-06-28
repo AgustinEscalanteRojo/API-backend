@@ -36,7 +36,7 @@ routerNasa.get('/:id', async (request, response) => {
 routerNasa.post('/', async (request, response) => {
   try {
     const results = await createNasa(request.body)
-    response.json({ result: results })
+    response.json(results)
   } catch (e) {
     if (e.message === 'Not found') {
       response.status(404).json(e.message)
@@ -46,6 +46,7 @@ routerNasa.post('/', async (request, response) => {
 
 routerNasa.put('/:id', async (request, response) => {
   try {
+    const { id } = request.params
     const results = await updateNasa(request.params.id, request.body)
     response.json({ from: 'server', result: results })
   } catch (e) {

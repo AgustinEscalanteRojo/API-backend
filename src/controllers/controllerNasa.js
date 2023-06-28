@@ -5,7 +5,7 @@ export const getNasaRovers = async () => {
 }
 
 export const getNasaById = async () => {
-  const rover = await Data.findOne({ _id: id })
+  const rover = await Data.findOne(idNasa)
 
   if (!rover) {
     throw new Error('Rover not found')
@@ -20,12 +20,12 @@ export const createNasa = async ({ idNasa, camera, img_src, earth_date }) => {
 }
 
 export const updateNasa = async (id, data) => {
-  await Data.findOneAndUpdate({ _id, id }, data)
+  const result = await Data.findOneAndUpdate(id, data, {new: true})
 
-  return getNasaById(id)
+  return result 
 }
 
 export const deleteNasaById = async (id) => {
-  await Data.deleteOne({ _id, id })
+  await Data.findByIdAndDelete(id)
   return true
 }

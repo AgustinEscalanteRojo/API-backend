@@ -1,8 +1,7 @@
 import express from 'express'
 import bodyParser from 'body-parser'
-import taskRouter from './src/router/tasks.js'
 import authRouter from './src/router/auth.js'
-import syncApiRouter from './src/router/syncApiNasa.js'
+import roverRouter from './src/router/rover.js'
 import connectToDb from './src/services/db.js'
 import dotenv from 'dotenv'
 import { ensureAuthenticated } from './src/middelware/auth.js'
@@ -22,9 +21,8 @@ const startApp = async () => {
 
   app.use(ensureAuthenticated)
 
-  app.use('/tasks', taskRouter)
   app.use('/auth', authRouter)
-  app.use('/syncApiNasa', syncApiRouter)
+  app.use('/rover', roverRouter)
 
   try {
     await connectToDb()
@@ -33,7 +31,7 @@ const startApp = async () => {
     })
   } catch (e) {
     console.log(e)
-    procces.exit(1)
+    process.exit(1)
   }
 }
 

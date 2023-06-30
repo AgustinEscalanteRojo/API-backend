@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken'
  * @param {string} email
  * @param {string} password
  * @return {Promise<string>}
+ * @return {salt.Promise}
  */
 
 const saltRounds = 10
@@ -20,7 +21,7 @@ export const signup = async ({ email, password }) => {
     throw new Error('Email is used')
   }
   const salt = await bcrypt.genSalt(saltRounds)
-  const hashedPassword = await bcrypt.hash(password, salt) // salt
+  const hashedPassword = await bcrypt.hash(password, salt)
   const user = new User({ email, password: hashedPassword, salt })
   await user.save()
   return jwt.sign({ email: user.email }, process.env.TOKEN_SECRET)

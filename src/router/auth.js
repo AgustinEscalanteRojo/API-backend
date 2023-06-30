@@ -30,9 +30,7 @@ router.get('/syncRover', async (request, response) => {
     const result = await getRover() // Llama a la función getRover del servicio de rover para obtener los datos del rover
     response.json({ result })
   } catch (e) {
-    if (e.message === 'Not found') {
-      response.status(404).json(e.message)
-    }
+    response.status(404).json(e.message)
   }
 })
 

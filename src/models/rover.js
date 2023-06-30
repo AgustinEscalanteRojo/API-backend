@@ -6,8 +6,8 @@ const roverSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    camera: {
-      name: String,
+    cameraName: {
+      type: String,
     },
     img_src: {
       type: String,

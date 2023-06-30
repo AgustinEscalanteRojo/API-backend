@@ -19,6 +19,7 @@ const roverSchema = new mongoose.Schema(
   { collection: 'rovers' }
 )
 
+// Creación del modelo "Rover" utilizando el esquema
 const Rover = mongoose.model('Rover', roverSchema)
 
 export default Rover

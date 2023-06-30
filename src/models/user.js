@@ -21,6 +21,7 @@ const userSchema = new mongoose.Schema(
   { collection: 'users' }
 )
 
+// Creación del modelo "User" utilizando el esquema
 const User = mongoose.model('User', userSchema)
 
 export default User

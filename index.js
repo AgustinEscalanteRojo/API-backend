@@ -22,7 +22,7 @@ const startApp = async () => {
   app.use(ensureAuthenticated)
 
   app.use('/auth', authRouter)
-  app.use('/rover', roverRouter)
+  app.use('/rovers', roverRouter)
 
   try {
     await connectToDb()

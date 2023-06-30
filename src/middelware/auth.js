@@ -1,17 +1,19 @@
 import jwt from 'jsonwebtoken'
 import User from '../models/user.js'
 
+const publicUrls = ['/auth/login', '/auth/signup']
+
 /**
  * Middleware para asegurar la autenticación del usuario.
  *
- * @param {object} request 
- * @param {object} response 
- * @param {function} next 
+ * @param {object} request
+ * @param {object} response
+ * @param {function} next
  */
 export const ensureAuthenticated = async (request, response, next) => {
   // Comprobar si la ruta de la solicitud incluye '/auth'.
   // Si es así, se permite el acceso sin autenticación.
-  if (request.path.includes('/auth')) {
+  if (publicUrls.includes(request.path)) {
     return next()
   }
 

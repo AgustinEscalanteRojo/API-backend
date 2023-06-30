@@ -5,7 +5,7 @@ const connectToDb = async () => {
   console.log('Start DB connection..')
 
   // Establecer la conexión con la base de datos MongoDB
-  await mongoose.connect('mongodb://localhost:27017/db', {
+  await mongoose.connect('mongodb://localhost:27017/agustin', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
